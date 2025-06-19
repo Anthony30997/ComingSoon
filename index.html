@@ -1,33 +1,133 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-            background-color: #f7f7f7;
-        }
-        h1 {
-            font-size: 36px;
-            color: #333;
-        }
-        p {
-            font-size: 18px;
-            color: #555;
-        }
-        a {
-            color: #0077cc;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Digital Command Log - GPT Integration</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f9f9f9; }
+    h1 { color: #003366; }
+    .entry { background: #fff; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+    .entry h2 { cursor: pointer; margin: 0; color: #004488; }
+    .entry-content { display: none; margin-top: 10px; }
+    .entry-content p { margin: 5px 0; }
+    .download-link { margin-top: 20px; display: block; font-weight: bold; }
+  </style>
 </head>
 <body>
-    <h1>Coming Soon</h1>
-    <p>Thanks for visiting! This website is under construction.</p>
-    <p>For inquiries, contact me at <a href="mailto:connect@anthonymascia.com">connect@anthonymascia.com</a></p>
+
+  <h1>Digital Command Log – Key Custody Workflows</h1>
+  
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Digital Pedigree Card Intake</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> Officer submits a digital pedigree card via the FORMS application. Entry becomes active when validated by desk officer.</p>
+      <p><strong>Required Fields:</strong> Officer Details, Prisoner Full Pedigree, Charges, Arrest Time and Location, Medical/EDP/Disabilities Info, Property/Funds, Validating Desk Officer, Prisoner Location Assignment (Cell, Juvenile Room, PDU, etc.)</p>
+      <p><strong>System Prompts:</strong> Officer: Submit full digital pedigree card via FORMS app. Desk: Do you approve the submitted pedigree card? If approved, assign prisoner location (Holding Cell, Overflow Cell 1, Juvenile Room, PDU).</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – [Full Arrest Intake Details per validated digital pedigree].<br>Prisoner assigned to [Holding Cell/Juvenile Room/PDU/etc.]<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Location Assignment</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> Occurs immediately after pedigree validation or when manually assigning cell location.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Assigned Location (Holding Cell, Overflow Cell, Juvenile Room, PDU), Time of Assignment</p>
+      <p><strong>System Prompts:</strong> What is the prisoner’s name? Where is the prisoner being held? (Holding Cell, Overflow Cell 1, Juvenile Room, PDU). What time was the assignment made?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] assigned to [Cell Location].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Removed from Command</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> Any time a prisoner leaves the stationhouse (hospital, court, other transport).</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Reason for Removal, Destination, Escorting Officer(s), RMP Number, Time of Removal</p>
+      <p><strong>System Prompts:</strong> What is the prisoner’s name? Why is the prisoner being removed? Where are they going? Who is escorting them? What is the RMP number? What time was the removal?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] removed from the command for [Reason] to [Location]. Escorted by [Officer(s)] via RMP [#].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Removed to Court</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> When a prisoner is transported from the command to court for arraignment.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Escorting Officer(s), RMP Number, Time of Removal</p>
+      <p><strong>System Prompts:</strong> What is the prisoner's name? Who is escorting them to court? What is the RMP number? What time did they leave the command?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] removed from the command for court processing. Escorted by [Officer(s)] via RMP [#].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Released on Desk Appearance Ticket</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> When a prisoner is released from the command on a DAT.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Charges, Issuing Officer, Time of Release, Return Date</p>
+      <p><strong>System Prompts:</strong> What is the prisoner’s name? What were the charges? Who issued the DAT? What time was the prisoner released? What is the DAT return date?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] released from custody on a Desk Appearance Ticket for [Charge(s)]. DAT issued by [Officer]. Return Date: [MM/DD/YYYY].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Released on Summons</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> When a prisoner is released from the command on a summons.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Charge, Issuing Officer, Time of Release, Summons Number</p>
+      <p><strong>System Prompts:</strong> What is the prisoner's name? What was the charge? Who issued the summons? What time was the prisoner released? What is the summons number?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] released from custody on a summons for [Charge]. Summons issued by [Officer]. Summons #: [Number].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Transported for Warrant Return</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> When a prisoner is transported from the command for the purpose of returning on a warrant.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Escorting Officer(s), Destination, RMP Number, Time of Transport</p>
+      <p><strong>System Prompts:</strong> What is the prisoner’s name? Who is escorting the prisoner? Where are they being transported to? What is the RMP number? What time did they leave?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] transported for return on warrant to [Destination]. Escorted by [Officer(s)] via RMP [#].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Released – Arrest Voided</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> When an arrest is determined to be void and the prisoner is released.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Authorizing Supervisor, Time of Release</p>
+      <p><strong>System Prompts:</strong> What is the prisoner's name? Who authorized the release? What time was the prisoner released?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] released from custody. Arrest voided.<br>Authorized by [Rank] [Name].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Removed to Hospital</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> When a prisoner is removed from the command for medical treatment, including injury, illness, EDP, or clearance.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Reason for Removal, Destination Hospital, Escorting Officer(s), RMP Number, Ambulance Number (if applicable), Time of Departure</p>
+      <p><strong>System Prompts:</strong> What is the prisoner's name? Why is the prisoner being taken to the hospital? What hospital are they being transported to? Who is escorting the prisoner? What is the RMP number? What is the ambulance number (if applicable)? What time did the prisoner leave?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] removed from the command to [Hospital Name] for [Reason]. Escorted by [Officer(s)] via RMP [#], Ambulance #: [Ambulance Number].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+  <div class="entry">
+    <h2 onclick="toggleContent(this)">Prisoner Returned from Hospital</h2>
+    <div class="entry-content">
+      <p><strong>Trigger:</strong> When a prisoner is returned to the command after being removed for hospital treatment or evaluation.</p>
+      <p><strong>Required Fields:</strong> Prisoner's Name, Hospital Name, Time of Return, Escorting Officer(s), RMP Number</p>
+      <p><strong>System Prompts:</strong> What is the prisoner’s name? What hospital are they returning from? Who escorted them back? What is the RMP number? What time did they return?</p>
+      <p><strong>Entry Format:</strong><br>[Time of Occurrence] – Prisoner [Name] returned to the command from [Hospital Name]. Escorted by [Officer(s)] via RMP [#].<br>Desk Officer: [Rank] [Name] [Tax #]</p>
+    </div>
+  </div>
+    
+
+  <a class="download-link" href="Digital_Command_Log_GPT_Integration_Spec.docx" download>
+    📥 Download Full GPT Integration Specification (.docx)
+  </a>
+
+  <script>
+    function toggleContent(header) {
+      const content = header.nextElementSibling;
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </body>
 </html>
